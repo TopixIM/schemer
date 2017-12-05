@@ -3,7 +3,7 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.style :as ui]
             [respo-ui.style.colors :as colors]
-            [respo.macros :refer [defcomp <> div span button]]
+            [respo.macros :refer [defcomp cursor-> <> div span button]]
             [respo.comp.inspect :refer [comp-inspect]]
             [respo.comp.space :refer [=<]]
             [app.comp.header :refer [comp-header]]
@@ -29,7 +29,9 @@
      (div
       {:style (merge ui/global ui/fullscreen ui/column)}
       (comp-header (:logged-in? store))
-      (if (:logged-in? store) (comp-content router store) (comp-login states))
+      (if (:logged-in? store)
+        (cursor-> :content comp-content states router (:user store))
+        (comp-login states))
       (comp-inspect "Store" store style-debugger)
       (comp-msg-list (get-in store [:session :notifications]) :session/remove-notification)
       (comp-reel (:reel-length store) {})))))

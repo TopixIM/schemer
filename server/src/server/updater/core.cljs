@@ -2,7 +2,8 @@
 (ns server.updater.core
   (:require [server.updater.session :as session]
             [server.updater.user :as user]
-            [server.updater.router :as router]))
+            [server.updater.router :as router]
+            [server.updater.task :as task]))
 
 (defn updater [db op op-data session-id op-id op-time]
   (case op
@@ -14,5 +15,5 @@
     :session/remove-notification
       (session/remove-notification db op-data session-id op-id op-time)
     :router/change (router/change db op-data session-id op-id op-time)
-    :inc (update db :count (fn [x] (+ x 1)))
+    :task/create (task/create db op-data session-id op-id op-time)
     db))

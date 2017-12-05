@@ -3,7 +3,7 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.style :as ui]
             [respo-ui.style.colors :as colors]
-            [respo.macros :refer [defcomp <> span div input button]]
+            [respo.macros :refer [defcomp cursor-> list-> <> span div input button]]
             [respo.comp.space :refer [=<]]
             [app.comp.profile :refer [comp-profile]]))
 
@@ -22,21 +22,32 @@
 
 (defcomp
  comp-content
- (router store)
- (case (:name router)
-   :profile (comp-profile (:user store))
-   (div
-    {:style (merge ui/flex ui/row)}
-    (div
-     {:style {:width 320, :padding-top 64}}
-     (render-section :do "Do" (:name router))
-     (render-section :queued "Queued" (:name router))
-     (render-section :done "Done" (:name router)))
-    (div
-     {:style (merge ui/flex {:padding-top 32, :margin-left 32})}
+ (states router user)
+ (let [state (or (:data states) "")]
+   (case (:name router)
+     :profile (comp-profile user)
      (div
-      {}
-      (input {:value "Content", :style (merge ui/input {:width 320})})
-      (=< 16 nil)
-      (button {:style ui/button} (<> "Add")))
-     (div {} (<> "list"))))))
+      {:style (merge ui/flex ui/row)}
+      (div
+       {:style {:width 320, :padding-top 64}}
+       (render-section :do "Do" (:name router))
+       (render-section :queued "Queued" (:name router))
+       (render-section :done "Done" (:name router)))
+      (div
+       {:style (merge ui/flex {:padding-top 32, :margin-left 32})}
+       (div
+        {}
+        (input
+         {:value state,
+          :style (merge ui/input {:width 320}),
+          :on {:input (fn [e d! m!] (m! (:value e)))}})
+        (=< 16 nil)
+        (button
+         {:style ui/button, :on {:click (fn [e d! m!] (d! :task/create state) (m! ""))}}
+         (<> "Add")))
+       (list->
+        :div
+        {}
+        (->> (:data router)
+             (map
+              (fn [entry] (let [[task-id task] entry] [task-id (div {} (<> (:text task)))]))))))))))
