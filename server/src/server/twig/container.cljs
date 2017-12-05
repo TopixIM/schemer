@@ -16,7 +16,7 @@
     (if logged-in?
       {:user (twig-user (get-in db [:users (:user-id session)])),
        :router (case (:name router)
-         :do (assoc router :data (:do db))
+         :doing (assoc router :data (:doing db))
          :queued (assoc router :data (:queued db))
          :done (assoc router :data (:done db))
          router)}

@@ -5,7 +5,7 @@
 
 (def configs {:storage-key "/data/cumulo/schemer.edn", :port 5021})
 
-(def database {:sessions {}, :users {}, :do {}, :queued {}, :done {}})
+(def database {:sessions {}, :users {}, :doing {}, :queued {}, :done {}})
 
 (def session
   {:user-id nil, :id nil, :nickname nil, :router {:name :home, :data nil}, :notifications []})
