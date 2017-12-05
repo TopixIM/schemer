@@ -13,6 +13,6 @@
     :user/log-out (user/log-out db op-data session-id op-id op-time)
     :session/remove-notification
       (session/remove-notification db op-data session-id op-id op-time)
-    :router/nav-top (router/nav-top db op-data session-id op-id op-time)
+    :router/change (router/change db op-data session-id op-id op-time)
     :inc (update db :count (fn [x] (+ x 1)))
     db))

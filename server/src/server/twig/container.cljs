@@ -6,7 +6,7 @@
  twig-container
  (db session records)
  (let [logged-in? (some? (:user-id session))
-       routes (:routes session)
+       router (:router session)
        base-data {:logged-in? logged-in?,
                   :session session,
                   :count (:count db),
@@ -14,5 +14,5 @@
    (merge
     base-data
     (if logged-in?
-      {:user (twig-user (get-in db [:users (:user-id session)])), :routes routes}
+      {:user (twig-user (get-in db [:users (:user-id session)])), :router router}
       nil))))

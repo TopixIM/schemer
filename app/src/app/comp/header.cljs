@@ -5,9 +5,9 @@
             [respo-ui.style.colors :as colors]
             [respo.macros :refer [defcomp <> span div]]))
 
-(defn on-profile [e dispatch!] (dispatch! :router/nav-top {:name :profile, :data nil}))
+(defn on-profile [e dispatch!] (dispatch! :router/change {:name :profile, :data nil}))
 
-(def style-logo {:cursor :pointer})
+(def style-logo {:cursor :pointer, :font-size 24, :font-weight :lighter})
 
 (def style-pointer {:cursor "pointer"})
 
@@ -19,14 +19,14 @@
    :font-size 16,
    :color :white})
 
-(defn on-home [e dispatch!] (dispatch! :router/nav-top {:name :home, :data nil}))
+(defn on-home [e dispatch!] (dispatch! :router/change {:name :home, :data nil}))
 
 (defcomp
  comp-header
  (logged-in?)
  (div
   {:style (merge ui/row-center style-header)}
-  (div {:on {:click on-home}, :style style-logo} (<> span "Cumulo" nil))
+  (div {:on {:click on-home}, :style style-logo} (<> span "Schemer" nil))
   (div
    {:style style-pointer, :on {:click on-profile}}
    (<> span (if logged-in? "Me" "Guest") nil))))

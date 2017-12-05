@@ -8,12 +8,8 @@
 (def database {:sessions {}, :users {}, :topics {}, :count 0})
 
 (def session
-  {:user-id nil,
-   :id nil,
-   :nickname nil,
-   :routes [{:name :home, :data nil}],
-   :notifications []})
+  {:user-id nil, :id nil, :nickname nil, :router {:name :home, :data nil}, :notifications []})
 
 (def notification {:id nil, :kind nil, :text nil})
 
-(def route {:name nil, :data {}})
+(def router {:name nil, :data {}})
