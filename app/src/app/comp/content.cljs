@@ -7,9 +7,9 @@
             [respo.comp.space :refer [=<]]
             [app.comp.profile :refer [comp-profile]]
             [app.comp.icon :refer [comp-icon]]
-            [app.comp.task-doing :refer [comp-task-doing]]
-            [app.comp.task-queued :refer [comp-task-queued]]
-            [app.comp.task-done :refer [comp-task-done]]
+            [app.comp.list-doing :refer [comp-list-doing]]
+            [app.comp.list-queued :refer [comp-list-queued]]
+            [app.comp.list-done :refer [comp-list-done]]
             [keycode.core :as keycode]))
 
 (defn render-section [key text router-name]
@@ -28,7 +28,7 @@
 (defcomp
  comp-content
  (states router user)
- (let [state (or (:data states) {:draft "", :focused-id nil})]
+ (let [state (or (:data states) {:draft ""})]
    (case (:name router)
      :profile (comp-profile user)
      (div
@@ -52,17 +52,8 @@
                    (if (= (:keycode e) keycode/return)
                      (do (d! :task/create (:draft state)) (m! (assoc state :draft "")))))}})))
        (=< nil 16)
-       (list->
-        :div
-        {}
-        (->> (:data router)
-             (sort (fn [pa pb] (- (:time (val pb)) (:time (val pa)))))
-             (map
-              (fn [entry]
-                (let [[task-id task] entry]
-                  [task-id
-                   (case (:name router)
-                     :doing (comp-task-doing task)
-                     :queued (comp-task-queued task)
-                     :done (comp-task-done task)
-                     (<> task))]))))))))))
+       (case (:name router)
+         :doing (cursor-> :doing comp-list-doing states (:data router))
+         :queued (comp-list-queued (:data router))
+         :done (comp-list-done (:data router))
+         (<> router)))))))

@@ -7,32 +7,29 @@
             [app.comp.icon :refer [comp-icon]]
             [respo.comp.space :refer [=<]]))
 
+(def style-task
+  {:line-height "32px",
+   :justify-content :flex-start,
+   :width 400,
+   :background-color (hsl 0 0 96),
+   :padding "0 8px",
+   :margin-bottom 8,
+   :cursor :pointer})
+
 (defcomp
  comp-task-doing
- (task)
+ (task focused-id on-focus!)
  (div
   {:style (merge
            ui/row-center
-           {:line-height "32px",
-            :justify-content :space-between,
-            :width 400,
-            :background-color (hsl 0 0 96),
-            :padding "0 8px",
-            :margin-bottom 8})}
-  (<> (:text task))
+           style-task
+           (if (= (:id task) focused-id) {:background-color (hsl 200 40 90)})),
+   :on {:click (fn [e d! m!] (on-focus! m!))}}
   (div
    {}
    (span
     {:style {:cursor :pointer},
-     :on {:click (fn [e d! m!] (d! :task/top {:id (:id task), :kind :doing}))}}
-    (comp-icon "android-arrow-up" nil))
-   (=< 8 nil)
-   (span
-    {:style {:cursor :pointer},
-     :on {:click (fn [e d! m!] (d! :task/swap-kind {:id (:id task), :kind :doing}))}}
-    (comp-icon "arrow-swap" nil))
-   (=< 8 nil)
-   (span
-    {:style {:cursor :pointer},
      :on {:click (fn [e d! m!] (d! :task/mark-as-done (:id task)))}}
-    (comp-icon "android-done" nil)))))
+    (comp-icon "android-done" nil)))
+  (=< 8 nil)
+  (<> (:text task))))

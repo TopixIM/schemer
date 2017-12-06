@@ -34,3 +34,8 @@
 
 (defn top [db op-data sid op-id op-time]
   (let [kind (:kind op-data), id (:id op-data)] (assoc-in db [kind id :time] op-time)))
+
+(defn edit [db op-data session-id op-id op-time]
+  (let [id (:id op-data), kind (:kind op-data), text (:text op-data)]
+    (println "write")
+    (assoc-in db [kind id :text] text)))
