@@ -13,13 +13,13 @@
 
 (def style-header
   {:height 48,
-   :background-color colors/motif,
    :justify-content :space-between,
    :padding "0 16px",
    :font-size 16,
-   :color :white})
+   :font-weight 100,
+   :font-family "Josefin Sans, Helvetica, sans-serif"})
 
-(defn on-home [e dispatch!] (dispatch! :router/change {:name :home, :data nil}))
+(defn on-home [e dispatch!] (dispatch! :router/change {:name :doing, :data nil}))
 
 (defcomp
  comp-header

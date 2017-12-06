@@ -7,7 +7,7 @@
       (assoc-in
        db
        [router-name op-id]
-       (merge schema/task {:id op-id, :text op-data, :created-time op-time}))
+       (merge schema/task {:id op-id, :text op-data, :time op-time}))
       db)))
 
 (defn mark-as-done [db op-data sid op-id op-time]
@@ -31,3 +31,6 @@
             (update kind (fn [tasks] (dissoc tasks task-id)))
             (assoc-in [another-kind task-id] task))
       db)))
+
+(defn top [db op-data sid op-id op-time]
+  (let [kind (:kind op-data), id (:id op-data)] (assoc-in db [kind id :time] op-time)))

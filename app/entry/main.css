@@ -6,3 +6,6 @@ body {
 body * {
   box-sizing: border-box;
 }
+::-webkit-input-placeholder {
+  color: #ccc;
+}

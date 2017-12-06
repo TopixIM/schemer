@@ -28,37 +28,35 @@
 (defcomp
  comp-content
  (states router user)
- (let [state (or (:data states) "")]
+ (let [state (or (:data states) {:draft "", :focused-id nil})]
    (case (:name router)
      :profile (comp-profile user)
      (div
       {:style (merge ui/flex ui/row)}
       (div
-       {:style {:width 320, :padding-top 64}}
+       {:style {:width 240, :padding-top 64}}
        (render-section :doing "Doing" (:name router))
        (render-section :queued "Queued" (:name router))
        (render-section :done "Done" (:name router)))
       (div
        {:style (merge ui/flex {:padding-top 32, :margin-left 32})}
-       (div
-        {}
-        (input
-         {:value state,
-          :placeholder "write task here",
-          :style (merge ui/input {:width 320}),
-          :on {:input (fn [e d! m!] (m! (:value e))),
-               :keydown (fn [e d! m!]
-                 (if (= (:keycode e) keycode/return) (do (d! :task/create state) (m! ""))))}})
-        (=< 16 nil)
-        (button
-         {:style ui/button, :on {:click (fn [e d! m!] (d! :task/create state) (m! ""))}}
-         (<> "Add")))
+       (if (contains? #{:doing :queued} (:name router))
+         (div
+          {}
+          (input
+           {:value (:draft state),
+            :placeholder "write task here",
+            :style (merge ui/input {:width 320}),
+            :on {:input (fn [e d! m!] (m! (assoc state :draft (:value e)))),
+                 :keydown (fn [e d! m!]
+                   (if (= (:keycode e) keycode/return)
+                     (do (d! :task/create (:draft state)) (m! (assoc state :draft "")))))}})))
        (=< nil 16)
        (list->
         :div
         {}
         (->> (:data router)
-             (sort (fn [pa pb] (- (:created-time (val pb)) (:created-time (val pa)))))
+             (sort (fn [pa pb] (- (:time (val pb)) (:time (val pa)))))
              (map
               (fn [entry]
                 (let [[task-id task] entry]

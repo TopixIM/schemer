@@ -18,4 +18,5 @@
     :task/create (task/create db op-data session-id op-id op-time)
     :task/mark-as-done (task/mark-as-done db op-data session-id op-id op-time)
     :task/swap-kind (task/swap-kind db op-data session-id op-id op-time)
+    :task/top (task/top db op-data session-id op-id op-time)
     db))
