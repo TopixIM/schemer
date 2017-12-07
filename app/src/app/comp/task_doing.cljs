@@ -3,33 +3,37 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.style :as ui]
             [respo-ui.style.colors :as colors]
-            [respo.macros :refer [defcomp <> span div]]
+            [respo.macros :refer [defcomp cursor-> <> span div]]
             [app.comp.icon :refer [comp-icon]]
-            [respo.comp.space :refer [=<]]))
+            [respo.comp.space :refer [=<]]
+            [app.comp.task-operator :refer [comp-task-operator]]))
 
 (def style-task
   {:line-height "32px",
    :justify-content :flex-start,
    :width "100%",
    :background-color (hsl 0 0 96),
-   :padding "0 8px",
-   :margin-bottom 8,
    :cursor :pointer})
 
 (defcomp
  comp-task-doing
- (task focused-id on-focus!)
+ (states task focused-id focused? on-focus!)
  (div
   {:style (merge
-           ui/row-center
-           style-task
-           (if (= (:id task) focused-id) {:background-color (hsl 200 40 90)})),
-   :on {:click (fn [e d! m!] (on-focus! m!))}}
+           {:width "100%", :background-color (hsl 0 0 96), :margin-bottom 8}
+           (if (= (:id task) focused-id) {:background-color (hsl 200 40 90)}))}
   (div
-   {}
-   (span
-    {:style {:cursor :pointer},
-     :on {:click (fn [e d! m!] (d! :task/mark-as-done (:id task)))}}
-    (comp-icon "android-done" nil)))
-  (=< 8 nil)
-  (<> (:text task))))
+   {:style (merge
+            ui/row-center
+            style-task
+            (if (= (:id task) focused-id) {:background-color (hsl 200 40 90)})),
+    :on {:click (fn [e d! m!] (on-focus! m!))}}
+   (div
+    {}
+    (span
+     {:style {:cursor :pointer},
+      :on {:click (fn [e d! m!] (d! :task/mark-as-done (:id task)))}}
+     (comp-icon "android-done" nil)))
+   (=< 8 nil)
+   (<> (:text task)))
+  (if focused? (cursor-> :operator comp-task-operator states task))))
