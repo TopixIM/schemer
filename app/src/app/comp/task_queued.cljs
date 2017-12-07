@@ -14,7 +14,7 @@
   {:style (merge
            ui/row-center
            {:line-height "32px",
-            :width 400,
+            :width "100%",
             :justify-content :space-between,
             :background-color (hsl 0 0 96),
             :padding "0 8px",

@@ -32,8 +32,11 @@
       (if (:logged-in? store)
         (cursor-> :content comp-content states router (:user store))
         (comp-login states))
-      (comp-inspect "Store" store style-debugger)
-      (comp-msg-list (get-in store [:session :notifications]) :session/remove-notification)
-      (comp-reel (:reel-length store) {})))))
+      (comment comp-inspect "Store" store style-debugger)
+      (comment
+       comp-msg-list
+       (get-in store [:session :notifications])
+       :session/remove-notification)
+      (comment comp-reel (:reel-length store) {})))))
 
 (def style-body {:padding "8px 16px"})

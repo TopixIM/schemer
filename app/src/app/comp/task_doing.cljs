@@ -10,7 +10,7 @@
 (def style-task
   {:line-height "32px",
    :justify-content :flex-start,
-   :width 400,
+   :width "100%",
    :background-color (hsl 0 0 96),
    :padding "0 8px",
    :margin-bottom 8,
