@@ -16,8 +16,8 @@
   {:style (merge
            {:padding 8,
             :position :absolute,
-            :bottom 8,
-            :right 8,
+            :bottom 0,
+            :right 0,
             :font-size 12,
             :color (hsl 0 0 60)}
            addional-styles)}

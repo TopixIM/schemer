@@ -21,12 +21,30 @@
 
 (defn on-home [e dispatch!] (dispatch! :router/change {:name :doing, :data nil}))
 
+(defn render-section [key text router-name]
+  (div
+   {:style (merge
+            {:font-family "Josefin Sans, Helvetica, sans-serif",
+             :font-size 20,
+             :font-weight "100",
+             :text-align :right,
+             :cursor :pointer,
+             :display :inline-block,
+             :margin "0 8px"}
+            (if (= key router-name) {:font-weight 300})),
+    :on {:click (fn [e d! m!] (d! :router/change {:name key}))}}
+   (<> text)))
+
 (defcomp
  comp-header
- (logged-in?)
+ (router logged-in?)
  (div
   {:style (merge ui/row-center style-header)}
-  (div {:on {:click on-home}, :style style-logo} (<> span "Schemer" nil))
+  (div
+   {}
+   (span {:on {:click on-home}, :style style-logo} (<> "Schemer"))
+   (render-section :queued "Queued" (:name router))
+   (render-section :done "Done" (:name router)))
   (div
    {:style style-pointer, :on {:click on-profile}}
    (<> span (if logged-in? "Me" "Guest") nil))))

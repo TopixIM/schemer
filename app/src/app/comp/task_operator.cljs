@@ -20,12 +20,12 @@
       {:style {:cursor :pointer},
        :on {:click (fn [e d! m!] (d! :task/swap-kind {:id (:id task), :kind :doing}))}}
       (comp-icon "arrow-swap" nil))
-     (=< 8 nil)
+     (=< 16 nil)
      (span
       {:style {:cursor :pointer},
        :on {:click (fn [e d! m!] (d! :task/top {:id (:id task), :kind :doing}))}}
       (comp-icon "android-arrow-up" nil))
-     (=< 8 nil)
+     (=< 16 nil)
      (if (some? (:draft state))
        (input
         {:value (:draft state),
@@ -40,5 +40,5 @@
                    (m! (assoc state :draft nil)))))}})
        (span
         {:style {:cursor :pointer},
-         :on {:click (fn [e d! m!] (m! (assoc state :draft "")))}}
+         :on {:click (fn [e d! m!] (m! (assoc state :draft (:text task))))}}
         (comp-icon "edit" nil)))))))

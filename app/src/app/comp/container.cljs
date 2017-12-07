@@ -28,7 +28,7 @@
        (<> "No connection!" style-alert)))
      (div
       {:style (merge ui/global ui/fullscreen ui/column)}
-      (comp-header (:logged-in? store))
+      (comp-header router (:logged-in? store))
       (if (:logged-in? store)
         (cursor-> :content comp-content states router (:user store))
         (comp-login states))
