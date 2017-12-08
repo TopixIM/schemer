@@ -14,7 +14,7 @@
  (let [state (or (:data states) {:focused-id nil})]
    (list->
     :div
-    {:style {:padding 8}}
+    {:style {}}
     (->> task-map
          (sort (fn [pa pb] (- (:time (val pb)) (:time (val pa)))))
          (map

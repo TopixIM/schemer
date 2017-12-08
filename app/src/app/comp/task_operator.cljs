@@ -13,7 +13,7 @@
  (states task)
  (let [state (or (:data states) {:draft nil})]
    (div
-    {:style {:width "100%", :height 32, :padding 8}}
+    {:style {:width "100%", :height 32, :padding 8, :text-align :right}}
     (div
      {}
      (span

@@ -13,7 +13,8 @@
    :justify-content :flex-start,
    :width "100%",
    :background-color (hsl 0 0 96),
-   :cursor :pointer})
+   :cursor :pointer,
+   :padding "0 8px"})
 
 (defcomp
  comp-task-doing
