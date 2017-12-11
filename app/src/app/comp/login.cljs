@@ -20,7 +20,7 @@
  (states)
  (let [state (or (:data states) initial-state)]
    (div
-    {}
+    {:style {:padding 16}}
     (div
      {:style {}}
      (div

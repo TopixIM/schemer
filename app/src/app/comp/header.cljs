@@ -7,7 +7,7 @@
 
 (defn on-profile [e dispatch!] (dispatch! :router/change {:name :profile, :data nil}))
 
-(def style-pointer {:cursor "pointer", :padding-right 8})
+(def style-pointer {:cursor "pointer", :padding-right 16})
 
 (def style-header
   {:height 48,
@@ -15,7 +15,8 @@
    :padding "0px",
    :font-size 16,
    :font-weight 100,
-   :font-family "Josefin Sans, Helvetica, sans-serif"})
+   :font-family "Josefin Sans, Helvetica, sans-serif",
+   :border-top (str "1px solid " (hsl 0 0 90))})
 
 (defn render-section [key text router-name]
   (div
@@ -26,9 +27,9 @@
              :text-align :right,
              :cursor :pointer,
              :display :inline-block,
-             :margin "0 8px",
+             :margin "0 16px",
              :color (hsl 0 0 60)}
-            (if (= key router-name) {:color (hsl 0 0 20)})),
+            (if (= key router-name) {:color (hsl 0 0 0)})),
     :on {:click (fn [e d! m!] (d! :router/change {:name key}))}}
    (<> text)))
 

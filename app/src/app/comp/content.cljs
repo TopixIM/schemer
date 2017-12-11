@@ -28,12 +28,17 @@
            :placeholder "write task here",
            :style (merge
                    ui/input
-                   {:width "100%", :display :block, :font-size 16, :padding "0 16px"}),
+                   {:width "100%",
+                    :display :block,
+                    :font-size 16,
+                    :padding "0 16px",
+                    :line-height "40px",
+                    :height 40}),
            :on {:input (fn [e d! m!] (m! (assoc state :draft (:value e)))),
                 :keydown (fn [e d! m!]
                   (if (= (:keycode e) keycode/return)
                     (do (d! :task/create (:draft state)) (m! (assoc state :draft "")))))}})))
-      (=< nil 16)
+      (=< nil 4)
       (case (:name router)
         :doing (cursor-> :doing comp-list-doing states (:data router))
         :queued (comp-list-queued (:data router))

@@ -12,7 +12,6 @@
   {:line-height "40px",
    :justify-content :flex-start,
    :width "100%",
-   :background-color (hsl 0 0 96),
    :cursor :pointer,
    :padding "0 16px",
    :font-size 16})
@@ -22,14 +21,10 @@
  (states task focused-id focused? on-focus!)
  (div
   {:style (merge
-           {:width "100%", :background-color (hsl 0 0 96), :margin-bottom 4}
-           (if (= (:id task) focused-id) {:background-color (hsl 200 40 90)}))}
+           {:width "100%", :border-bottom (str "1px solid " (hsl 0 0 94))}
+           (if (= (:id task) focused-id) {:background-color (hsl 200 0 97)}))}
   (div
-   {:style (merge
-            ui/row-center
-            style-task
-            (if (= (:id task) focused-id) {:background-color (hsl 200 40 90)})),
-    :on {:click (fn [e d! m!] (on-focus! m!))}}
+   {:style (merge ui/row-center style-task), :on {:click (fn [e d! m!] (on-focus! m!))}}
    (div
     {}
     (span

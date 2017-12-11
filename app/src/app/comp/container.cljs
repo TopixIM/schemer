@@ -26,17 +26,17 @@
       (span
        {:style {:cursor :pointer}, :on {:click (fn [e d! m!] (d! :effect/connect nil))}}
        (<> "No connection!" style-alert)))
-     (div
-      {:style (merge ui/global ui/fullscreen ui/column)}
-      (comp-header router (:logged-in? store))
-      (if (:logged-in? store)
+     (if (:logged-in? store)
+       (div
+        {:style (merge ui/global ui/fullscreen ui/column)}
         (cursor-> :content comp-content states router (:user store))
-        (comp-login states))
-      (comment comp-inspect "Store" store style-debugger)
-      (comment
-       comp-msg-list
-       (get-in store [:session :notifications])
-       :session/remove-notification)
-      (comment comp-reel (:reel-length store) {})))))
+        (comp-header router (:logged-in? store))
+        (comment comp-inspect "Store" store style-debugger)
+        (comment
+         comp-msg-list
+         (get-in store [:session :notifications])
+         :session/remove-notification)
+        (comment comp-reel (:reel-length store) {}))
+       (comp-login states)))))
 
 (def style-body {:padding "8px 16px"})

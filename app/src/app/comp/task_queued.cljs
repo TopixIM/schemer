@@ -16,10 +16,9 @@
            {:line-height "40px",
             :width "100%",
             :justify-content :space-between,
-            :background-color (hsl 0 0 96),
             :padding "0 16px",
             :font-size 16,
-            :margin-bottom 8})}
+            :border-bottom (str "1px solid " (hsl 0 0 90))})}
   (<> (:text task))
   (div
    {}
