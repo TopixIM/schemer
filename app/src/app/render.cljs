@@ -6,8 +6,8 @@
             [cljs.reader :refer [read-string]]))
 
 (def base-info
-  {:title "Cumulo",
-   :icon "http://cdn.tiye.me/logo/cumulo.png",
+  {:title "Schemer",
+   :icon "http://cdn.tiye.me/logo/topix.png",
    :ssr nil,
    :inline-styles [(slurp "entry/main.css")]})
 
@@ -24,7 +24,7 @@
 (defn prod-page []
   (let [html-content (make-string (comp-container {} nil))
         assets (read-string (slurp "dist/assets.edn"))
-        cdn (if preview? "" "http://cdn.tiye.me/cumulo-workflow/")
+        cdn (if preview? "" "http://cdn.tiye.me/schemer/")
         prefix-cdn #(str cdn %)]
     (make-page
      html-content

@@ -1,11 +1,11 @@
 {
-  "name": "cumulo-workflow",
+  "name": "schemer",
   "version": "0.1.0",
-  "description": "Stack Workflow",
+  "description": "Task Schemer",
   "main": "index.js",
   "scripts": {
-    "cdn": "rsync -avr --progress dist/* tiye.me:cdn/cumulo-workflow",
-    "tiye": "rsync -r dist/{index.html,manifest.json} tiye.me:repo/Cumulo/workflow/",
+    "cdn": "rsync -avr --progress dist/* tiye.me:cdn/schemer",
+    "tiye": "rsync -r dist/{index.html,manifest.json} tiye.me:repo/TopixIM/schemer/",
     "upload": "yarn cdn && yarn tiye",
     "release": "shadow-cljs release browser",
     "watch": "shadow-cljs watch browser",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:mvc-works/stack-workflow.git"
+    "url": "git@github.com:TopixIM/schemer.git"
   },
   "author": "jiyinyiyong",
   "license": "MIT",
