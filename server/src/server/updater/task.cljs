@@ -39,3 +39,6 @@
   (let [id (:id op-data), kind (:kind op-data), text (:text op-data)]
     (println "write")
     (assoc-in db [kind id :text] text)))
+
+(defn remove-done [db op-data session-id op-id op-time]
+  (update db :done (fn [tasks] (dissoc tasks op-data))))

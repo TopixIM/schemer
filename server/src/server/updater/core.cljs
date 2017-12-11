@@ -20,4 +20,5 @@
     :task/swap-kind (task/swap-kind db op-data session-id op-id op-time)
     :task/top (task/top db op-data session-id op-id op-time)
     :task/edit (task/edit db op-data session-id op-id op-time)
+    :task/remove-done (task/remove-done db op-data session-id op-id op-time)
     db))
