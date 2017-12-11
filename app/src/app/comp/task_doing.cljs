@@ -9,19 +9,20 @@
             [app.comp.task-operator :refer [comp-task-operator]]))
 
 (def style-task
-  {:line-height "32px",
+  {:line-height "40px",
    :justify-content :flex-start,
    :width "100%",
    :background-color (hsl 0 0 96),
    :cursor :pointer,
-   :padding "0 8px"})
+   :padding "0 16px",
+   :font-size 16})
 
 (defcomp
  comp-task-doing
  (states task focused-id focused? on-focus!)
  (div
   {:style (merge
-           {:width "100%", :background-color (hsl 0 0 96), :margin-bottom 8}
+           {:width "100%", :background-color (hsl 0 0 96), :margin-bottom 4}
            (if (= (:id task) focused-id) {:background-color (hsl 200 40 90)}))}
   (div
    {:style (merge

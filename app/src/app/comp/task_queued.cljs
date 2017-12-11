@@ -13,11 +13,12 @@
  (div
   {:style (merge
            ui/row-center
-           {:line-height "32px",
+           {:line-height "40px",
             :width "100%",
             :justify-content :space-between,
             :background-color (hsl 0 0 96),
-            :padding "0 8px",
+            :padding "0 16px",
+            :font-size 16,
             :margin-bottom 8})}
   (<> (:text task))
   (div

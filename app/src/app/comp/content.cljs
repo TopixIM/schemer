@@ -26,7 +26,9 @@
          (input
           {:value (:draft state),
            :placeholder "write task here",
-           :style (merge ui/input {:width 320}),
+           :style (merge
+                   ui/input
+                   {:width "100%", :display :block, :font-size 16, :padding "0 16px"}),
            :on {:input (fn [e d! m!] (m! (assoc state :draft (:value e)))),
                 :keydown (fn [e d! m!]
                   (if (= (:keycode e) keycode/return)

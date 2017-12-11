@@ -5,4 +5,4 @@
             [respo-ui.style.colors :as colors]
             [respo.macros :refer [defcomp <> span div]]))
 
-(defcomp comp-task-done (task) (div {} (<> (:text task))))
+(defcomp comp-task-done (task) (div {:style {:padding "0 16px"}} (<> (:text task))))

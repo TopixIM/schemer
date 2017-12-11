@@ -8,4 +8,11 @@ body * {
 }
 ::-webkit-input-placeholder {
   color: #ccc;
+  font-weight: 100;
+}
+
+
+body, input, textarea {
+  font-size: 16px;
+  font-family: Hind, Arial, sans-serif;
 }

@@ -9,4 +9,6 @@
 (defcomp
  comp-icon
  (icon-name style)
- (create-element :i {:class-name (str "icon ion-" icon-name), :style style}))
+ (create-element
+  :i
+  {:class-name (str "icon ion-" icon-name), :style (merge {:font-size 16} style)}))
