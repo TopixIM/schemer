@@ -19,7 +19,7 @@
    (case (:name router)
      :profile (comp-profile user)
      (div
-      {:style (merge ui/flex ui/column)}
+      {:style (merge ui/flex ui/column {:overflow :auto})}
       (if (contains? #{:doing :queued} (:name router))
         (div
          {}

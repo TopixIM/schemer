@@ -11,7 +11,7 @@
  (task-map)
  (list->
   :div
-  {}
+  {:style {:overflow :auto, :padding "16px 0 40px 0"}}
   (->> task-map
        (sort (fn [pa pb] (- (:time (val pb)) (:time (val pa)))))
        (map (fn [entry] (let [[task-id task] entry] [task-id (comp-task-done task)]))))))
