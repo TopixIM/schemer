@@ -4,14 +4,20 @@
             [respo-ui.style :as ui]
             [respo-ui.style.colors :as colors]
             [respo.macros :refer [defcomp list-> <> span div]]
-            [app.comp.task-queued :refer [comp-task-queued]]))
+            [app.comp.task-queued :refer [comp-task-queued]]
+            [app.theme :as theme]
+            [app.style :as style]
+            [app.comp.header :refer [comp-header]]))
 
 (defcomp
  comp-list-queued
  (task-map)
- (list->
-  :div
+ (div
   {}
-  (->> task-map
-       (sort (fn [pa pb] (- (:time (val pb)) (:time (val pa)))))
-       (map (fn [entry] (let [[task-id task] entry] [task-id (comp-task-queued task)]))))))
+  (comp-header "Queued")
+  (list->
+   :div
+   {:style (merge ui/flex {:overflow :auto})}
+   (->> task-map
+        (sort (fn [pa pb] (- (:time (val pb)) (:time (val pa)))))
+        (map (fn [entry] (let [[task-id task] entry] [task-id (comp-task-queued task)])))))))

@@ -6,13 +6,15 @@
             [respo.macros :refer [defcomp cursor-> <> div span button]]
             [respo.comp.inspect :refer [comp-inspect]]
             [respo.comp.space :refer [=<]]
-            [app.comp.header :refer [comp-header]]
+            [app.comp.footer :refer [comp-footer]]
             [app.comp.login :refer [comp-login]]
             [respo-message.comp.msg-list :refer [comp-msg-list]]
             [app.comp.reel :refer [comp-reel]]
-            [app.comp.content :refer [comp-content]]))
+            [app.comp.content :refer [comp-content]]
+            [app.style :as style]
+            [app.theme :as theme]))
 
-(def style-alert {:font-family "Josefin Sans", :font-weight 100, :font-size 40})
+(def style-alert {:font-family style/font-fancy, :font-size 40, :font-weight 100})
 
 (def style-debugger {:bottom 0, :left 0, :max-width "100%"})
 
@@ -22,7 +24,11 @@
  (let [state (:data states), session (:session store), router (:router store)]
    (if (nil? store)
      (div
-      {:style (merge ui/global ui/fullscreen ui/center)}
+      {:style (merge
+               ui/global
+               ui/fullscreen
+               ui/center
+               {:background-color theme/wet, :color :white})}
       (span
        {:style {:cursor :pointer}, :on {:click (fn [e d! m!] (d! :effect/connect nil))}}
        (<> "No connection!" style-alert)))
@@ -32,7 +38,7 @@
         (div
          {:style (merge ui/global ui/fullscreen ui/column)}
          (cursor-> :content comp-content states router (:user store))
-         (comp-header router (:logged-in? store)))
+         (comp-footer router (:logged-in? store)))
         (div {} (comp-login states)))
       (comp-msg-list (get-in store [:session :notifications]) :session/remove-notification)
       (comment comp-reel (:reel-length store) {})

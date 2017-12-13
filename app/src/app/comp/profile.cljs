@@ -5,7 +5,8 @@
             [respo-ui.style :as ui]
             [respo-ui.style.colors :as colors]
             [respo.macros :refer [defcomp <> span div a]]
-            [respo.comp.space :refer [=<]]))
+            [respo.comp.space :refer [=<]]
+            [app.comp.header :refer [comp-header]]))
 
 (defn on-log-out [e dispatch!]
   (dispatch! :user/log-out nil)
@@ -22,7 +23,10 @@
  comp-profile
  (user)
  (div
-  {:style (merge ui/flex {:padding 16})}
-  (<> span (str "Hello! " (:name user)) nil)
-  (=< 8 nil)
-  (a {:style style-trigger, :on {:click on-log-out}} (<> span "Log out" nil))))
+  {:style ui/flex}
+  (comp-header "Profile")
+  (div
+   {:style {:padding 16}}
+   (<> span (str "Hello! " (:name user)) nil)
+   (=< 8 nil)
+   (a {:style style-trigger, :on {:click on-log-out}} (<> span "Log out" nil)))))

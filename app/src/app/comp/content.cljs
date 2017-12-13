@@ -23,7 +23,8 @@
       (if (contains? #{:doing :queued} (:name router))
         (div
          {}
-         (input
+         (comment
+          input
           {:value (:draft state),
            :placeholder "write task here",
            :style (merge
@@ -38,7 +39,6 @@
                 :keydown (fn [e d! m!]
                   (if (= (:keycode e) keycode/return)
                     (do (d! :task/create (:draft state)) (m! (assoc state :draft "")))))}})))
-      (=< nil 4)
       (case (:name router)
         :doing (cursor-> :doing comp-list-doing states (:data router))
         :queued (comp-list-queued (:data router))
