@@ -21,7 +21,10 @@
              {:position :fixed, :background-color (hsl 0 0 0 0.4)})}
     (div
      {:style {:padding 16, :background-color :white, :width "88%"}}
-     (div {} (<> "Create Task" nil))
+     (div
+      {:style (merge ui/row-center {:justify-content :space-between})}
+      (<> "Create Task" nil)
+      (span {:on {:click (fn [e d! m!] (d! :session/dialog nil))}} (comp-icon "close" nil)))
      (=< nil 8)
      (div
       {}
