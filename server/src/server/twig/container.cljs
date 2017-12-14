@@ -19,5 +19,6 @@
          :doing (assoc router :data (:doing db))
          :queued (assoc router :data (:queued db))
          :done (assoc router :data (:done db))
-         router)}
+         router),
+       :dialog (:dialog session)}
       nil))))

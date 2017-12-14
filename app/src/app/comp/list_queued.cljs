@@ -15,9 +15,13 @@
  (div
   {}
   (comp-header "Queued")
-  (list->
-   :div
-   {:style (merge ui/flex {:overflow :auto})}
-   (->> task-map
-        (sort (fn [pa pb] (- (:time (val pb)) (:time (val pa)))))
-        (map (fn [entry] (let [[task-id task] entry] [task-id (comp-task-queued task)])))))))
+  (if (empty? task-map)
+    (div
+     {:style {:padding "8px 16px", :color (hsl 0 0 79), :font-family style/font-fancy}}
+     (<> "No tasks" nil))
+    (list->
+     :div
+     {:style (merge ui/flex {:overflow :auto})}
+     (->> task-map
+          (sort (fn [pa pb] (- (:time (val pb)) (:time (val pa)))))
+          (map (fn [entry] (let [[task-id task] entry] [task-id (comp-task-queued task)]))))))))

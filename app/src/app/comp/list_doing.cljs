@@ -18,21 +18,25 @@
    (div
     {}
     (comp-header "Schemer")
-    (list->
-     :div
-     {:style {}}
-     (->> task-map
-          (sort (fn [pa pb] (- (:time (val pb)) (:time (val pa)))))
-          (map
-           (fn [entry]
-             (let [[task-id task] entry
-                   on-focus! (fn [m!] (m! *cursor* (assoc state :focused-id task-id)))]
-               [task-id
-                (cursor->
-                 task-id
-                 comp-task-doing
-                 states
-                 task
-                 (:focused-id state)
-                 (= task-id (:focused-id state))
-                 on-focus!)]))))))))
+    (if (empty? task-map)
+      (div
+       {:style {:padding "8px 16px", :color (hsl 0 0 79), :font-family style/font-fancy}}
+       (<> "No tasks" nil))
+      (list->
+       :div
+       {:style {}}
+       (->> task-map
+            (sort (fn [pa pb] (- (:time (val pb)) (:time (val pa)))))
+            (map
+             (fn [entry]
+               (let [[task-id task] entry
+                     on-focus! (fn [m!] (m! *cursor* (assoc state :focused-id task-id)))]
+                 [task-id
+                  (cursor->
+                   task-id
+                   comp-task-doing
+                   states
+                   task
+                   (:focused-id state)
+                   (= task-id (:focused-id state))
+                   on-focus!)])))))))))

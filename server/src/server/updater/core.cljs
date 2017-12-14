@@ -9,11 +9,12 @@
   (case op
     :session/connect (session/connect db op-data session-id op-id op-time)
     :session/disconnect (session/disconnect db op-data session-id op-id op-time)
+    :session/remove-notification
+      (session/remove-notification db op-data session-id op-id op-time)
+    :session/dialog (session/dialog db op-data session-id op-id op-time)
     :user/log-in (user/log-in db op-data session-id op-id op-time)
     :user/sign-up (user/sign-up db op-data session-id op-id op-time)
     :user/log-out (user/log-out db op-data session-id op-id op-time)
-    :session/remove-notification
-      (session/remove-notification db op-data session-id op-id op-time)
     :router/change (router/change db op-data session-id op-id op-time)
     :task/create (task/create db op-data session-id op-id op-time)
     :task/mark-as-done (task/mark-as-done db op-data session-id op-id op-time)

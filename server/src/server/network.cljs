@@ -46,9 +46,9 @@
             new-store (render-twig (twig-container db session records) old-store)
             changes (diff-twig old-store new-store {:key :id})
             socket (get @*registry session-id)]
-        (println "Changes for" session-id ":" changes)
-        (println "Records length:" (count records))
         (if (and (not= changes []) (some? socket))
           (do
+           (println "Records length:" (count records))
+           (println "Changes for" session-id ":" (count changes))
            (.send socket (pr-str changes))
            (swap! client-caches assoc session-id new-store)))))))

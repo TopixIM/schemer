@@ -8,7 +8,12 @@
 (def database {:sessions {}, :users {}, :doing {}, :queued {}, :done {}})
 
 (def session
-  {:user-id nil, :id nil, :nickname nil, :router {:name :doing, :data nil}, :notifications []})
+  {:user-id nil,
+   :id nil,
+   :nickname nil,
+   :router {:name :doing, :data nil},
+   :notifications [],
+   :dialog nil})
 
 (def notification {:id nil, :kind nil, :text nil})
 

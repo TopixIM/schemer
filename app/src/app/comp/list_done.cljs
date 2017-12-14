@@ -13,11 +13,15 @@
  comp-list-done
  (task-map)
  (div
-  {}
+  {:style (merge ui/flex ui/column)}
   (comp-header "Done")
-  (list->
-   :div
-   {:style {:overflow :auto, :padding "16px 0 40px 0"}}
-   (->> task-map
-        (sort (fn [pa pb] (- (:time (val pb)) (:time (val pa)))))
-        (map (fn [entry] (let [[task-id task] entry] [task-id (comp-task-done task)])))))))
+  (if (empty? task-map)
+    (div
+     {:style {:padding "8px 16px", :color (hsl 0 0 79), :font-family style/font-fancy}}
+     (<> "No tasks" nil))
+    (list->
+     :div
+     {:style (merge ui/flex {:overflow :auto, :padding "16px 0 40px 0"})}
+     (->> task-map
+          (sort (fn [pa pb] (- (:time (val pb)) (:time (val pa)))))
+          (map (fn [entry] (let [[task-id task] entry] [task-id (comp-task-done task)]))))))))

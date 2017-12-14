@@ -12,3 +12,5 @@
    db
    [:sessions session-id :notifications]
    (fn [notifications] (subvec notifications 0 op-data))))
+
+(defn dialog [db op-data sid op-id op-time] (assoc-in db [:sessions sid :dialog] op-data))
