@@ -12,7 +12,8 @@
             [app.comp.reel :refer [comp-reel]]
             [app.comp.content :refer [comp-content]]
             [app.style :as style]
-            [app.theme :as theme]))
+            [app.theme :as theme]
+            [app.comp.drafter :refer [comp-drafter]]))
 
 (def style-alert {:font-family style/font-fancy, :font-size 40, :font-weight 100})
 
@@ -41,6 +42,10 @@
          (comp-footer router (:logged-in? store)))
         (div {} (comp-login states)))
       (comp-msg-list (get-in store [:session :notifications]) :session/remove-notification)
+      (if (some? (:dialog store))
+        (case (-> store :dialog :name)
+          :create (cursor-> :drafter comp-drafter states)
+          (<> (str "Unknown dialog" (pr-str (:dialog store))))))
       (comment comp-reel (:reel-length store) {})
       (comment comp-inspect "Store" store style-debugger)))))
 
