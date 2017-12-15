@@ -13,7 +13,7 @@
  (div
   {:style {:padding "0 16px"}}
   (<> (:text task))
-  (=< 8 nil)
-  (span
-   {:on {:click (fn [e d! m!] (d! :task/remove-done (:id task)))}}
-   (comp-icon "ios-trash-outline" nil))))
+  (comp-icon
+   "ios-trash-outline"
+   {:margin-left 8}
+   (fn [e d! m!] (d! :task/remove-done (:id task))))))

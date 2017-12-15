@@ -22,6 +22,4 @@
             :font-family style/font-fancy,
             :font-size 20})}
   (<> title)
-  (span
-   {:on {:click (fn [e d! m!] (d! :session/dialog {:name :create}))}}
-   (comp-icon "plus" {:font-size 16}))))
+  (comp-icon "plus" {:font-size 16} (fn [e d! m!] (d! :session/dialog {:name :create})))))

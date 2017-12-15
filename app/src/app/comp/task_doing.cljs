@@ -30,7 +30,7 @@
     (span
      {:style {:cursor :pointer},
       :on {:click (fn [e d! m!] (d! :task/mark-as-done (:id task)))}}
-     (comp-icon "android-done" nil)))
+     (comp-icon "android-done" nil nil)))
    (=< 8 nil)
    (<> (:text task)))
   (if focused? (cursor-> :operator comp-task-operator states task))))

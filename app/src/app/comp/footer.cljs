@@ -16,7 +16,7 @@
             {:margin "0 16px", :color (hsl 0 0 60), :text-align :center}
             (if (= key router-name) {:color (hsl 0 0 0)})),
     :on {:click (fn [e d! m!] (d! :router/change {:name key}))}}
-   (comp-icon icon-name {:font-size 32})))
+   (comp-icon icon-name {:font-size 32} nil)))
 
 (def style-footer
   {:height 48,

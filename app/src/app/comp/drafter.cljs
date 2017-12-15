@@ -24,7 +24,9 @@
      (div
       {:style (merge ui/row-center {:justify-content :space-between})}
       (<> "Create Task" nil)
-      (span {:on {:click (fn [e d! m!] (d! :session/dialog nil))}} (comp-icon "close" nil)))
+      (span
+       {:on {:click (fn [e d! m!] (d! :session/dialog nil))}}
+       (comp-icon "close" nil nil)))
      (=< nil 8)
      (div
       {}

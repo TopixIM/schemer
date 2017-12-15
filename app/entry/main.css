@@ -22,3 +22,6 @@ body, input, textarea {
   font-family: Hind, Arial, sans-serif;
 }
 
+span::before {
+  pointer-events: none;
+}

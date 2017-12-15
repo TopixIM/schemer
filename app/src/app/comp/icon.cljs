@@ -8,7 +8,8 @@
 
 (defcomp
  comp-icon
- (icon-name style)
- (create-element
-  :i
-  {:class-name (str "icon ion-" icon-name), :style (merge {:font-size 16} style)}))
+ (icon-name style on-click)
+ (span
+  {:class-name (str "icon ion-" icon-name),
+   :style (merge {:font-size 16} style),
+   :on (if (fn? on-click) {:click (fn [e d! m!] (on-click e d! m!))})}))

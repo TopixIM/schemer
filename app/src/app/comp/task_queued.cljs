@@ -25,9 +25,9 @@
    (span
     {:style {:cursor :pointer},
      :on {:click (fn [e d! m!] (d! :task/swap-kind {:kind :queued, :id (:id task)}))}}
-    (comp-icon "arrow-swap" nil))
+    (comp-icon "arrow-swap" nil nil))
    (=< 8 nil)
    (span
     {:style {:cursor :pointer},
      :on {:click (fn [e d! m!] (d! :task/mark-as-done (:id task)))}}
-    (comp-icon "android-done" nil)))))
+    (comp-icon "android-done" nil nil)))))
