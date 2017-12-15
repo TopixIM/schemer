@@ -8,6 +8,8 @@
             [respo.comp.space :refer [=<]]
             [keycode.core :as keycode]))
 
+(def style-icon {:font-size 18, :cursor :pointer})
+
 (defcomp
  comp-task-operator
  (states task)
@@ -16,15 +18,16 @@
     {:style {:width "100%", :height 32, :padding 8, :text-align :right}}
     (div
      {}
-     (span
-      {:style {:cursor :pointer},
-       :on {:click (fn [e d! m!] (d! :task/swap-kind {:id (:id task), :kind :doing}))}}
-      (comp-icon "arrow-swap" nil nil))
+     (comp-icon
+      "arrow-swap"
+      style-icon
+      (fn [e d! m!] (d! :task/swap-kind {:id (:id task), :kind :doing})))
+     
      (=< 16 nil)
-     (span
-      {:style {:cursor :pointer},
-       :on {:click (fn [e d! m!] (d! :task/top {:id (:id task), :kind :doing}))}}
-      (comp-icon "android-arrow-up" nil nil))
+     (comp-icon
+      "android-arrow-up"
+      style-icon
+      (fn [e d! m!] (d! :task/top {:id (:id task), :kind :doing})))
      (=< 16 nil)
      (if (some? (:draft state))
        (input
@@ -38,7 +41,4 @@
                   (do
                    (d! :task/edit {:kind :doing, :id (:id task), :text (:draft state)})
                    (m! (assoc state :draft nil)))))}})
-       (span
-        {:style {:cursor :pointer},
-         :on {:click (fn [e d! m!] (m! (assoc state :draft (:text task))))}}
-        (comp-icon "edit" nil nil)))))))
+       (comp-icon "edit" style-icon (fn [e d! m!] (m! (assoc state :draft (:text task))))))))))

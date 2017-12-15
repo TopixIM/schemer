@@ -39,7 +39,7 @@
      (div
       {:style (merge ui/row {:justify-content :flex-end})}
       (button
-       {:style ui/button,
+       {:style style/button,
         :on {:click (fn [e d! m!]
                (if (not (string/blank? state))
                  (do (d! :task/create state) (d! :session/dialog nil) (m! nil))))}}

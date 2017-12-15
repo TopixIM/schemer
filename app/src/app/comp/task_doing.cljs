@@ -9,7 +9,7 @@
             [app.comp.task-operator :refer [comp-task-operator]]))
 
 (def style-task
-  {:line-height "40px",
+  {:line-height "48px",
    :justify-content :flex-start,
    :width "100%",
    :cursor :pointer,

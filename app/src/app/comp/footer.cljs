@@ -5,7 +5,8 @@
             [respo-ui.style.colors :as colors]
             [respo.macros :refer [defcomp <> span div]]
             [app.comp.icon :refer [comp-icon]]
-            [app.style :as style]))
+            [app.style :as style]
+            [app.theme :as theme]))
 
 (def style-pointer {:cursor "pointer", :padding-right 16})
 
@@ -13,8 +14,8 @@
   (div
    {:style (merge
             ui/flex
-            {:margin "0 16px", :color (hsl 0 0 60), :text-align :center}
-            (if (= key router-name) {:color (hsl 0 0 0)})),
+            {:margin "0 16px", :color theme/sky, :text-align :center}
+            (if (= key router-name) {:color theme/water})),
     :on {:click (fn [e d! m!] (d! :router/change {:name key}))}}
    (comp-icon icon-name {:font-size 32} nil)))
 

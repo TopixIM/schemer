@@ -13,7 +13,7 @@
  (div
   {:style (merge
            ui/row-center
-           {:line-height "40px",
+           {:line-height "48px",
             :width "100%",
             :justify-content :space-between,
             :padding "0 16px",
